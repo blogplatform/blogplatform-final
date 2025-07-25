@@ -1,0 +1,358 @@
+# =============================================
+# Blog Platform ASP - Monorepo .gitignore
+# =============================================
+
+# ===== PYTHON/FASTAPI BACKEND =====
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+backend/venv/
+backend/env/
+backend/.venv/
+backend/ENV/
+backend/env.bak/
+backend/venv.bak/
+.venv/
+venv/
+env/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff (if used)
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff (if used)
+instance/
+.webassets-cache
+
+# Scrapy stuff (if used)
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# celery beat schedule file
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# FastAPI specific
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== NODE.JS/ANGULAR FRONTEND =====
+
+# Compiled output
+frontend/dist/
+frontend/tmp/
+frontend/out-tsc/
+frontend/bazel-out/
+
+# Node
+frontend/node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+frontend/.idea/
+frontend/.project
+frontend/.classpath
+frontend/.c9/
+frontend/*.launch
+frontend/.settings/
+frontend/*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+frontend/.angular/cache
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/coverage/
+frontend/libpeerconnection.log
+frontend/testem.log
+frontend/typings/
+
+# e2e
+frontend/e2e/*.js
+frontend/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Angular specific
+frontend/.angular/
+frontend/dist/
+frontend/tmp/
+
+# ===== GENERAL =====
+
+# Operating System Files
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.nfs*
+
+# ===== IDE & EDITOR FILES =====
+
+# JetBrains IDEs
+.idea/
+*.swp
+*.swo
+*~
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Visual Studio
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ===== LOGS =====
+*.log
+logs/
+*.log.*
+
+# ===== TEMPORARY FILES =====
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ===== BACKUP FILES =====
+*.bak
+*.backup
+*.old
+
+# ===== DEPLOYMENT & CI/CD =====
+.netlify/
+.vercel/
+.serverless/
+.aws/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Kubernetes
+*.k8s.yaml
+*.k8s.yml
+
+# ===== SECURITY & CREDENTIALS =====
+# AWS
+.aws/
+aws-credentials.json
+
+# Google Cloud
+gcloud-service-key.json
+*.json
+
+# SSH Keys
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# Certificates
+*.crt
+*.p12
+*.pfx
+
+# Database dumps
+*.sql
+*.dump
+
+# ===== PROJECT SPECIFIC =====
+# MongoDB dumps
+*.bson
+dumps/
+
+# S3 uploads (if stored locally)
+uploads/
+static-files/
+
+# Test files
+test-results/
+coverage-reports/
+
+# Documentation builds
+docs/build/
+docs/_build/
+
+# ===== MISC =====
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# Temporary folders
+tmp/
+temp/

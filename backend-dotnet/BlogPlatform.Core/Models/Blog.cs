@@ -103,3 +103,13 @@ public class PaginatedBlogsResponse
     public int Limit { get; set; }
     public int TotalPages { get; set; }
 }
+
+// For frontend compatibility - match the expected page_size field
+public class BlogsApiResponse
+{
+    public List<BlogResponse> Blogs { get; set; } = new();
+    public int Total { get; set; }
+    public int Page { get; set; }
+    public int PageSize { get; set; }
+    public int TotalPages { get; set; }
+}

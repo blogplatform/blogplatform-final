@@ -4,6 +4,7 @@ using BlogPlatform.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using System.Security.Claims;
 
 namespace BlogPlatform.API.Controllers;
@@ -25,7 +26,7 @@ public class LikesController : ControllerBase
     [Authorize]
     public async Task<ActionResult> ToggleLike(string blogId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }
@@ -86,7 +87,7 @@ public class LikesController : ControllerBase
     [HttpGet("blogs/{blogId}/count")]
     public async Task<ActionResult<int>> GetBlogLikesCount(string blogId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }
@@ -99,7 +100,7 @@ public class LikesController : ControllerBase
     [Authorize]
     public async Task<ActionResult<LikeResponse>> GetMyLikeForBlog(string blogId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }
@@ -135,7 +136,7 @@ public class LikesController : ControllerBase
     [Authorize]
     public async Task<ActionResult<MessageResponse>> RemoveLike(string blogId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }

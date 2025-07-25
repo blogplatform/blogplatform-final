@@ -2,6 +2,7 @@ using BlogPlatform.Core.Models;
 using BlogPlatform.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace BlogPlatform.API.Controllers;
 

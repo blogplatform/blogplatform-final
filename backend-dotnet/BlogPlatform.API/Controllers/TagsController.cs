@@ -4,7 +4,9 @@ using BlogPlatform.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using System.Security.Claims;
+using Tag = BlogPlatform.Core.Models.Tag;
 
 namespace BlogPlatform.API.Controllers;
 
@@ -96,7 +98,7 @@ public class TagsController : ControllerBase
     [HttpGet("{tagId}")]
     public async Task<ActionResult<TagResponse>> GetTag(string tagId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(tagId))
+        if (!MongoDB.Bson.ObjectId.TryParse(tagId, out _))
         {
             return BadRequest(new { detail = "Invalid tag ID" });
         }
@@ -118,7 +120,7 @@ public class TagsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<MessageResponse>> DeleteTag(string tagId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(tagId))
+        if (!MongoDB.Bson.ObjectId.TryParse(tagId, out _))
         {
             return BadRequest(new { detail = "Invalid tag ID" });
         }

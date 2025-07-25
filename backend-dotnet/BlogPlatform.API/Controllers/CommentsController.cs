@@ -4,6 +4,7 @@ using BlogPlatform.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using System.Security.Claims;
 
 namespace BlogPlatform.API.Controllers;
@@ -25,7 +26,7 @@ public class CommentsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<CommentResponse>> CreateComment(string blogId, [FromBody] CommentCreate commentCreate)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }
@@ -81,7 +82,7 @@ public class CommentsController : ControllerBase
         [FromQuery] int skip = 0,
         [FromQuery] int limit = 20)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }
@@ -148,7 +149,7 @@ public class CommentsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<CommentResponse>> UpdateComment(string commentId, [FromBody] CommentCreate commentUpdate)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(commentId))
+        if (!MongoDB.Bson.ObjectId.TryParse(commentId, out _))
         {
             return BadRequest(new { detail = "Invalid comment ID" });
         }
@@ -195,7 +196,7 @@ public class CommentsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<MessageResponse>> DeleteComment(string commentId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(commentId))
+        if (!MongoDB.Bson.ObjectId.TryParse(commentId, out _))
         {
             return BadRequest(new { detail = "Invalid comment ID" });
         }

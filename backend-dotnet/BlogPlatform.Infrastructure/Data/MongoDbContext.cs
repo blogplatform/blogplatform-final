@@ -23,6 +23,6 @@ public class MongoDbContext
     public IMongoCollection<Blog> Blogs => _database.GetCollection<Blog>("blogs");
     public IMongoCollection<Comment> Comments => _database.GetCollection<Comment>("comments");
     public IMongoCollection<Like> Likes => _database.GetCollection<Like>("likes");
-    public IMongoCollection<Tag> Tags => _database.GetCollection<Tag>("tags");
+    public IMongoCollection<BlogPlatform.Core.Models.Tag> Tags => _database.GetCollection<BlogPlatform.Core.Models.Tag>("tags");
     public IMongoCollection<UserInterests> UserInterests => _database.GetCollection<UserInterests>("user_interests");
 }

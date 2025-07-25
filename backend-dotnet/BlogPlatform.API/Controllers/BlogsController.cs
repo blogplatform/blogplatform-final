@@ -4,7 +4,9 @@ using BlogPlatform.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using System.Security.Claims;
+using Tag = BlogPlatform.Core.Models.Tag;
 
 namespace BlogPlatform.API.Controllers;
 
@@ -195,7 +197,7 @@ public class BlogsController : ControllerBase
     [HttpGet("{blogId}")]
     public async Task<ActionResult<BlogResponse>> GetBlog(string blogId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }
@@ -230,7 +232,7 @@ public class BlogsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<BlogResponse>> UpdateBlog(string blogId, [FromBody] BlogUpdate blogUpdate)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }
@@ -321,7 +323,7 @@ public class BlogsController : ControllerBase
     [Authorize]
     public async Task<ActionResult<MessageResponse>> DeleteBlog(string blogId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(blogId))
+        if (!MongoDB.Bson.ObjectId.TryParse(blogId, out _))
         {
             return BadRequest(new { detail = "Invalid blog ID" });
         }

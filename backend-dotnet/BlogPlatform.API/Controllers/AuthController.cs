@@ -4,6 +4,7 @@ using BlogPlatform.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using System.Security.Claims;
 
 namespace BlogPlatform.API.Controllers;
@@ -196,7 +197,7 @@ public class AuthController : ControllerBase
     [HttpGet("users/{userId}")]
     public async Task<ActionResult<UserResponse>> GetUserById(string userId)
     {
-        if (!MongoDB.Bson.ObjectId.IsValid(userId))
+        if (!MongoDB.Bson.ObjectId.TryParse(userId, out _))
         {
             return BadRequest(new { detail = "Invalid user ID format" });
         }

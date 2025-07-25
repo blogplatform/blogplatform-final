@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogPlatform.Core.Models;
 
+[BsonIgnoreExtraElements]
 public class User
 {
     [BsonId]

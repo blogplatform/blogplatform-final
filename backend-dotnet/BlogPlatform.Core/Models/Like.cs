@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BlogPlatform.Core.Models;
 
+[BsonIgnoreExtraElements]
 public class Like
 {
     [BsonId]

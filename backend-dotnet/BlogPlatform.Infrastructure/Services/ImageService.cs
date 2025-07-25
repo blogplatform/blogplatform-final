@@ -2,6 +2,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using BlogPlatform.Core.Models;
 using BlogPlatform.Infrastructure.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
 namespace BlogPlatform.Infrastructure.Services;

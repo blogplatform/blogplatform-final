@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Amazon.S3;
+using Amazon.Extensions.NETCore.Setup;
+using MongoDB.Driver;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,11 @@ builder.Services.AddSwaggerGen();
 
 // Configure MongoDB
 builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddSingleton<IMongoDatabase>(serviceProvider =>
+{
+    var context = serviceProvider.GetRequiredService<MongoDbContext>();
+    return context.Database;
+});
 
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JWT");

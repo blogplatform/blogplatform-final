@@ -54,9 +54,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Configure AWS S3
-builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-builder.Services.AddAWSService<IAmazonS3>();
+// Configure AWS S3 with explicit credentials from appsettings
+builder.Services.AddSingleton<IAmazonS3>(serviceProvider =>
+{
+    var configuration = serviceProvider.GetService<IConfiguration>();
+    var awsOptions = new Amazon.Extensions.NETCore.Setup.AWSOptions
+    {
+        Credentials = new Amazon.Runtime.BasicAWSCredentials(
+            configuration["AWS:AccessKey"],
+            configuration["AWS:SecretKey"]
+        ),
+        Region = Amazon.RegionEndpoint.GetBySystemName(configuration["AWS:Region"])
+    };
+    return awsOptions.CreateServiceClient<IAmazonS3>();
+});
 
 // Register services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -67,7 +78,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://localhost:4200", "https://localhost:4200")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();

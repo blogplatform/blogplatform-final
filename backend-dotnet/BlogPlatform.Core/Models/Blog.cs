@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BlogPlatform.Core.Models;
 
@@ -51,17 +52,32 @@ public class Blog
 
 public class BlogResponse
 {
+    [JsonPropertyName("_id")]
     public string Id { get; set; } = string.Empty;
+    
+    [JsonPropertyName("user_id")]
     public string UserId { get; set; } = string.Empty;
+    
     public string? Username { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Content { get; set; } = string.Empty;
     public List<string> Tags { get; set; } = new();
+    
+    [JsonPropertyName("main_image_url")]
     public string? MainImageUrl { get; set; }
+    
     public bool Published { get; set; }
+    
+    [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; set; }
+    
+    [JsonPropertyName("updated_at")]
     public DateTime UpdatedAt { get; set; }
+    
+    [JsonPropertyName("comment_count")]
     public int CommentCount { get; set; }
+    
+    [JsonPropertyName("likes_count")]
     public int LikesCount { get; set; }
 }
 
@@ -101,6 +117,8 @@ public class PaginatedBlogsResponse
     public int Total { get; set; }
     public int Page { get; set; }
     public int Limit { get; set; }
+    
+    [JsonPropertyName("total_pages")]
     public int TotalPages { get; set; }
 }
 

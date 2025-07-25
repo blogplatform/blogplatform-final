@@ -25,19 +25,32 @@ public class ImageService : IImageService
     {
         try
         {
+            Console.WriteLine($"Starting image upload. File: {file?.FileName}, Size: {file?.Length}, ContentType: {file?.ContentType}");
+            
             // Validate file
             if (file == null || file.Length == 0)
+            {
+                Console.WriteLine("File validation failed: File is empty");
                 return new ImageUploadResponse { Success = false, Message = "File is empty" };
+            }
 
             if (!file.ContentType.StartsWith("image/"))
+            {
+                Console.WriteLine($"File validation failed: Invalid content type {file.ContentType}");
                 return new ImageUploadResponse { Success = false, Message = "Only image files are allowed" };
+            }
 
             if (file.Length > MaxFileSize)
+            {
+                Console.WriteLine($"File validation failed: File size {file.Length} exceeds limit {MaxFileSize}");
                 return new ImageUploadResponse { Success = false, Message = "File exceeds 5MB limit" };
+            }
 
             // Generate unique key
             var fileExtension = Path.GetExtension(file.FileName);
             var key = $"uploads/{Guid.NewGuid():N}{fileExtension}";
+            Console.WriteLine($"Generated S3 key: {key}");
+            Console.WriteLine($"Using bucket: {_bucketName}, region: {_region}");
 
             // Upload to S3
             using var stream = file.OpenReadStream();
@@ -46,13 +59,18 @@ public class ImageService : IImageService
                 BucketName = _bucketName,
                 Key = key,
                 InputStream = stream,
-                ContentType = file.ContentType,
-                CannedACL = S3CannedACL.PublicRead
+                ContentType = file.ContentType
+                // Note: Removed CannedACL since bucket doesn't allow ACLs
+                // The bucket should be configured with public read access via bucket policy
             };
 
+            Console.WriteLine("Attempting S3 upload...");
             await _s3Client.PutObjectAsync(request);
+            Console.WriteLine("S3 upload successful!");
 
             var imageUrl = GenerateS3Url(key);
+            Console.WriteLine($"Generated image URL: {imageUrl}");
+            
             return new ImageUploadResponse
             {
                 Success = true,
@@ -62,6 +80,10 @@ public class ImageService : IImageService
         }
         catch (Exception ex)
         {
+            Console.WriteLine($"Image upload failed with exception: {ex.Message}");
+            Console.WriteLine($"Exception type: {ex.GetType().Name}");
+            Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            
             return new ImageUploadResponse
             {
                 Success = false,

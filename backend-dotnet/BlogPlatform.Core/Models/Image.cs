@@ -1,11 +1,15 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BlogPlatform.Core.Models;
 
 public class ImageUploadResponse
 {
     public bool Success { get; set; }
+    
+    [JsonPropertyName("imageUrl")]
     public string? ImageUrl { get; set; }
+    
     public string? Message { get; set; }
 }
 

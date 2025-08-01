@@ -1,4 +1,4 @@
-// Landing feature exports
-export { LandingComponent } from './pages/home/home.component';
-export { landingRoutes } from './home.routes';
+// Home feature exports
+export { HomeComponent } from './pages/home/home.component';
+export { homeRoutes } from './home.routes';
 

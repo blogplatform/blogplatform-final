@@ -236,6 +236,18 @@ export class AuthService {
     return this.http.get<User>(`${this.apiUrl}/users/${userId}`);
   }
 
+  verifyEmail(token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/verify-email`, { token });
+  }
+
+  requestPasswordReset(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, { token, new_password: newPassword });
+  }
+
   // Debug methods
   getRefreshTimerStatus(): boolean {
     return !!this.refreshTokenTimer;
